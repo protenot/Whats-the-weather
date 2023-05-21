@@ -1,3 +1,5 @@
+import { hasWeather } from "./hasWeather.js";
+
 export async function getWeather(wrapper) {
   /*
    * wrapper.innerHTML = <>
@@ -13,14 +15,14 @@ export async function getWeather(wrapper) {
   const button = document.createElement("button");
   button.innerText = "Жми сюда";
   form.append(button);
-  async function hasWeather(cityName) {
-    const API_KEY = "c768bc4e962d2a69c28ba404045dc96c";
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${API_KEY}`
-    );
+  // async function hasWeather(cityName) {
+  // const API_KEY = "c768bc4e962d2a69c28ba404045dc96c";
+  // const response = await fetch(
+  //   `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${API_KEY}`
+  // );
 
-    return response.json();
-  }
+  // return response.json();
+  // }
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
     const form = ev.target;
@@ -38,5 +40,17 @@ export async function getWeather(wrapper) {
     avatar.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
     const imgBox = document.querySelector(".img-box");
     imgBox.append(avatar);
+
+    button.addEventListener("click", () => {
+      const weatherBox = document.querySelector("#weather-box");
+      const newButton = document.createElement("button");
+      newButton.classList.add("list");
+      newButton.textContent = cityN.textContent;
+      weatherBox.append(newButton);
+      console.log(newButton);
+      // const cityOnButton = document.createElement('p')
+      // p.innerHTML = cityN.textContent;
+      // newButton.append(p);
+    });
   });
 }

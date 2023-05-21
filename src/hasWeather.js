@@ -1,0 +1,8 @@
+export async function hasWeather(cityName) {
+  const API_KEY = "c768bc4e962d2a69c28ba404045dc96c";
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${API_KEY}`
+  );
+
+  return response.json();
+}

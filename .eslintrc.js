@@ -13,9 +13,7 @@ module.exports = {
   plugins: ["jest", "prettier"],
   rules: {
     "no-shadow": "warn",
-    // builtinGlobals:true,
-    // ignoreOnInitialization: warn,
-    // "one-var": "off",
+    "no-unused-vars": "warn",
     "prettier/prettier": "error",
     "require-jsdoc": 0,
     "import/prefer-default-export": "off",
