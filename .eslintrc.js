@@ -4,18 +4,34 @@ module.exports = {
     es2021: true,
     "jest/globals": true,
   },
-  extends: ["airbnb-base", "prettier"],
-  overrides: [],
+  extends: ["eslint:recommended", "airbnb-base", "prettier"],
+  // overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["jest"],
+  plugins: ["jest", "prettier"],
   rules: {
+    "no-shadow": "warn",
+    // builtinGlobals:true,
+    // ignoreOnInitialization: warn,
+    // "one-var": "off",
+    "prettier/prettier": "error",
+    "require-jsdoc": 0,
     "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        js: "always",
+        mjs: "never",
+        jsx: "never",
+      },
+    ],
     "max-len": [
       "error",
       {
+        code: 130,
         ignoreComments: true,
       },
     ],
