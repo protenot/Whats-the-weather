@@ -5,7 +5,7 @@ module.exports = {
     "jest/globals": true,
   },
   extends: ["eslint:recommended", "airbnb-base", "prettier"],
-  // overrides: [],
+  overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
