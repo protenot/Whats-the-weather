@@ -25,11 +25,11 @@ export async function getWeather(wrapper) {
   // }
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
-    const form = ev.target;
-    const input = form.querySelector("input");
+    // const formWeather = ev.target;
+    const inputCity = form.querySelector("input");
 
-    const cityName = input.value;
-    input.value = "";
+    const cityName = inputCity.value;
+    inputCity.value = "";
     const weather = await hasWeather(cityName);
     const cityN = document.querySelector(".city-name");
     cityN.textContent = weather.name;
@@ -41,16 +41,27 @@ export async function getWeather(wrapper) {
     const imgBox = document.querySelector(".img-box");
     imgBox.append(avatar);
 
-    button.addEventListener("click", () => {
-      const weatherBox = document.querySelector("#weather-box");
-      const newButton = document.createElement("button");
-      newButton.classList.add("list");
+    // button.addEventListener("click", () => {
+    const weatherBox = document.querySelector("#weather-box");
+    const newButton = document.createElement("button");
+    newButton.classList.add("list");
+
+    if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-      weatherBox.append(newButton);
+
+      const allButtons = weatherBox.querySelectorAll(".list");
+
+      weatherBox.prepend(newButton);
+
       console.log(newButton);
-      // const cityOnButton = document.createElement('p')
-      // p.innerHTML = cityN.textContent;
-      // newButton.append(p);
-    });
+
+      if (allButtons.length > 10) {
+        allButtons[10].remove();
+      }
+    }
+    // const cityOnButton = document.createElement('p')
+    // p.innerHTML = cityN.textContent;
+    // newButton.append(p);
   });
+  //  });
 }

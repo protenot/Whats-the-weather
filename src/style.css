@@ -31,3 +31,11 @@ input {
 .list {
   display: block;
 }
+#weather-box {
+  background-color: pink;
+}
+.list {
+  width: 30%;
+  margin: 0 auto;
+  /* border-style: none;*/
+}
