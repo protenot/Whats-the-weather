@@ -26,16 +26,17 @@ export async function getWeather(wrapper) {
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
     // const formWeather = ev.target;
+
     const inputCity = form.querySelector("input");
 
-    const cityName = inputCity.value;
+    let cityName = inputCity.value;
     inputCity.value = "";
-    const weather = await hasWeather(cityName);
+    let weather = await hasWeather(cityName);
     const cityN = document.querySelector(".city-name");
     cityN.textContent = weather.name;
     const temperatureData = document.querySelector(".temperature-data");
     temperatureData.textContent = Math.round(weather.main.temp);
-    const iconId = weather.weather[0].icon;
+    let iconId = weather.weather[0].icon;
     const avatar = document.querySelector(".avatar");
     avatar.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
     const imgBox = document.querySelector(".img-box");
@@ -48,12 +49,25 @@ export async function getWeather(wrapper) {
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-
-      const allButtons = weatherBox.querySelectorAll(".list");
-
+      // let array = new Set();
+      // array.add(newButton);
+      // console.log (array);
       weatherBox.prepend(newButton);
+      console.log(weatherBox);
+      // const allButtons = Array.from(new Set(weatherBox.querySelectorAll(".list")))
+      const allButtons = weatherBox.querySelectorAll(".list");
+      // const unique = Array.from(new Set(allButtons));
 
       console.log(newButton);
+      newButton.addEventListener("click", async () => {
+        console.log(newButton.textContent);
+        cityName = newButton.textContent;
+        weather = await hasWeather(cityName);
+        cityN.textContent = weather.name;
+        console.log(weather.main.temp);
+        temperatureData.textContent = Math.round(weather.main.temp);
+        iconId = weather.weather[0].icon;
+      });
 
       if (allButtons.length > 10) {
         allButtons[10].remove();
