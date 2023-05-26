@@ -33,11 +33,14 @@ input {
 }
 #header-container {
   font-size: 24px;
-  background-color: pink;
+  color: white;
+  background-color: transparent;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   /*justify-content: center;*/
+  background-image: url("img/sunset.jpg");
+  background-position: left;
 }
 .loclal {
   display: block;
