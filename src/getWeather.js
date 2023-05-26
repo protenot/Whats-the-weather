@@ -1,5 +1,25 @@
 import { hasWeather } from "./hasWeather.js";
+import { getCity } from "./getCity.js";
+// import { translit} from "./converter.js"
 
+export async function getLocalWeather(inner) {
+  const nameOfLocalCity = document.createElement("p");
+  nameOfLocalCity.classList.add("local");
+  const place = await getCity();
+  nameOfLocalCity.innerText = `Город :  ${place}`;
+  console.log(getCity());
+  inner.append(nameOfLocalCity);
+  const tempLocal = document.createElement("p");
+  tempLocal.classList.add("local");
+  const data = await hasWeather(place);
+  tempLocal.innerText = `Температура :  ${Math.round(data.main.temp)}`;
+  inner.append(tempLocal);
+  const imgLocal = document.createElement("img");
+  imgLocal.classList.add("local");
+  const iconLocal = data.weather[0].icon;
+  imgLocal.src = `http://openweathermap.org/img/wn/${iconLocal}@2x.png`;
+  inner.append(imgLocal);
+}
 export async function getWeather(wrapper) {
   /*
    * wrapper.innerHTML = <>

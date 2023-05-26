@@ -31,6 +31,21 @@ input {
 .list {
   display: block;
 }
+#header-container {
+  font-size: 24px;
+  background-color: pink;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  /*justify-content: center;*/
+}
+.loclal {
+  display: block;
+  margin-top: 20px;
+  text-align: bottom;
+  background-color: beige;
+}
+
 #weather-box {
   background-color: pink;
 }
