@@ -12,7 +12,7 @@ export async function getLocalWeather(inner) {
   const tempLocal = document.createElement("p");
   tempLocal.classList.add("local");
   const data = await hasWeather(place);
-  tempLocal.innerText = `Температура :  ${Math.round(data.main.temp)}`;
+  tempLocal.innerText = `Температура :  ${Math.round(data.main.temp)} °C`;
   inner.append(tempLocal);
   const imgLocal = document.createElement("img");
   imgLocal.classList.add("local");
@@ -54,18 +54,42 @@ export async function getWeather(wrapper) {
     let weather = await hasWeather(cityName);
     const cityN = document.querySelector(".city-name");
     cityN.textContent = weather.name;
+
     const temperatureData = document.querySelector(".temperature-data");
-    temperatureData.textContent = Math.round(weather.main.temp);
+    temperatureData.textContent = `${Math.round(weather.main.temp)} °C`;
     let iconId = weather.weather[0].icon;
     const avatar = document.querySelector(".avatar");
     avatar.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
     const imgBox = document.querySelector(".img-box");
     imgBox.append(avatar);
 
-    // button.addEventListener("click", () => {
     const weatherBox = document.querySelector("#weather-box");
     const newButton = document.createElement("button");
     newButton.classList.add("list");
+    let { lon } = weather.coord;
+    console.log(lon);
+    let { lat } = weather.coord;
+    console.log(lat);
+    const mapContainer = document.querySelector("#map-container");
+    const mapFooter = document.createElement("img");
+    mapFooter.classList.add("map");
+
+    mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
+
+    let allMaps = document.querySelectorAll(".map");
+    // mapContainer.append(mapFooter);
+    console.log(Object.values(mapContainer));
+    if (allMaps.length === 1) {
+      // console.log(mapFooter);
+      // console.log(mapContainer[0]);
+      allMaps[0].remove();
+      // console.log(mapFooter)
+      mapContainer.append(mapFooter);
+    } else {
+      mapContainer.append(mapFooter);
+
+      // console.log(mapFooter)}
+    }
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
@@ -79,20 +103,39 @@ export async function getWeather(wrapper) {
       // const unique = Array.from(new Set(allButtons));
 
       console.log(newButton);
+
       newButton.addEventListener("click", async () => {
         console.log(newButton.textContent);
         cityName = newButton.textContent;
         weather = await hasWeather(cityName);
         cityN.textContent = weather.name;
         console.log(weather.main.temp);
-        temperatureData.textContent = Math.round(weather.main.temp);
+        temperatureData.textContent = `${Math.round(weather.main.temp)} °C`;
         iconId = weather.weather[0].icon;
+        avatar.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
+        lon = weather.coord.lon;
+        lat = weather.coord.lat;
+
+        mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
+
+        allMaps = document.querySelectorAll(".map");
+        console.log(allMaps);
+        if (allMaps.length === 1) {
+          allMaps[0].remove();
+
+          mapContainer.append(mapFooter);
+        } else {
+          mapContainer.append(mapFooter);
+
+          // console.log(mapFooter)}
+        }
       });
 
       if (allButtons.length > 10) {
         allButtons[10].remove();
       }
     }
+
     // const cityOnButton = document.createElement('p')
     // p.innerHTML = cityN.textContent;
     // newButton.append(p);

@@ -6,7 +6,11 @@
 }
 
 body {
-  background-color: aquamarine;
+  background-color: beige;
+}
+h1 {
+  font-size: 30px;
+  font-weight: bold;
 }
 .temperature {
   display: flex;
