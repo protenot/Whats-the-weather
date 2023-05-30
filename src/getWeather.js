@@ -63,7 +63,7 @@ export async function getWeather(wrapper) {
     const imgBox = document.querySelector(".img-box");
     imgBox.append(avatar);
 
-    const weatherBox = document.querySelector("#weather-box");
+    let weatherBox = document.querySelector("#weather-box");
     const newButton = document.createElement("button");
     newButton.classList.add("list");
     let { lon } = weather.coord;
@@ -78,7 +78,7 @@ export async function getWeather(wrapper) {
 
     let allMaps = document.querySelectorAll(".map");
     // mapContainer.append(mapFooter);
-    console.log(Object.values(mapContainer));
+    // console.log(Object.values(mapContainer));
     if (allMaps.length === 1) {
       // console.log(mapFooter);
       // console.log(mapContainer[0]);
@@ -93,16 +93,21 @@ export async function getWeather(wrapper) {
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-      // let array = new Set();
-      // array.add(newButton);
-      // console.log (array);
-      weatherBox.prepend(newButton);
-      console.log(weatherBox);
-      // const allButtons = Array.from(new Set(weatherBox.querySelectorAll(".list")))
-      const allButtons = weatherBox.querySelectorAll(".list");
-      // const unique = Array.from(new Set(allButtons));
 
-      console.log(newButton);
+      console.log(weatherBox.innerText);
+
+      const cityButtons = Array.from(weatherBox.innerText).join("");
+      if (cityButtons.includes(newButton.textContent)) {
+        console.log(cityButtons);
+      } else {
+        weatherBox.prepend(newButton);
+      }
+      const allButtons = weatherBox.querySelectorAll(".list");
+
+      console.log(allButtons);
+      weatherBox = Array.from(cityButtons);
+
+      console.log(weatherBox);
 
       newButton.addEventListener("click", async () => {
         console.log(newButton.textContent);
@@ -135,10 +140,5 @@ export async function getWeather(wrapper) {
         allButtons[10].remove();
       }
     }
-
-    // const cityOnButton = document.createElement('p')
-    // p.innerHTML = cityN.textContent;
-    // newButton.append(p);
   });
-  //  });
 }
