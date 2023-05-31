@@ -1,23 +1,34 @@
 import { getCity } from "./getCity.js";
 
-const fetchMock = require("jest-fetch-mock");
-
-// import fetch from "node-fetch";
 describe("getCity", () => {
   it("is a function", () => {
     expect(getCity).toBeInstanceOf(Function);
   });
+});
+const mockObject = {
+  ip: "2001:448a:5061:38bf:152a:be0b:af45:8a42",
+  organization_name: "PT Telekomunikasi Indonesia",
+  city: "Banjar Danginpangkung",
+  asn: 7713,
+  organization: "AS7713 PT Telekomunikasi Indonesia",
+};
+const mockCity = "Banjar Danginpangkung";
 
-  it("returns string", async () => {
-    // const url = "https://get.geojs.io/v1/ip/geo.json";
-    // fetch = jest.fn(() => Promise.resolve());
-    // const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
-    // fetch(url).then(res =>{return res.json()})
-    fetchMock.doMock("http://fake.com", { hello: "world" });
-    const responseCity = await getCity("http://fake.com");
-    const result = await responseCity.json();
-    // return await getCity().then(data=>{
-    expect(result.hello).toEqual("world");
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(mockObject),
+  })
+);
+
+describe("fetch", () => {
+  let city;
+  describe("fetch finds the right place ", () => {
+    beforeEach(async () => {
+      city = await getCity();
+    });
+
+    it("returns right place Banjar Danginpangkung", () => {
+      expect(city).toEqual(mockCity);
+    });
   });
 });
-// })
