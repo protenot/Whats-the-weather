@@ -1,6 +1,5 @@
 import { hasWeather } from "./hasWeather.js";
 import { getCity } from "./getCity.js";
-// import { translit} from "./converter.js"
 
 export async function getLocalWeather(inner) {
   const nameOfLocalCity = document.createElement("p");
@@ -28,7 +27,7 @@ export async function getWeather(wrapper) {
    * </>;
    */
   const form = document.createElement("form");
-  wrapper.append(form);
+  wrapper.prepend(form);
   const input = document.createElement("input");
   input.placeholder = "Введите название города";
   form.append(input);
@@ -47,10 +46,8 @@ export async function getWeather(wrapper) {
     ev.preventDefault();
     // const formWeather = ev.target;
 
-    const inputCity = form.querySelector("input");
-
-    let cityName = inputCity.value;
-    inputCity.value = "";
+    let cityName = input.value;
+    input.value = "";
     let weather = await hasWeather(cityName);
     const cityN = document.querySelector(".city-name");
     cityN.textContent = weather.name;
@@ -77,11 +74,8 @@ export async function getWeather(wrapper) {
     mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
 
     let allMaps = document.querySelectorAll(".map");
-    // mapContainer.append(mapFooter);
-    // console.log(Object.values(mapContainer));
+
     if (allMaps.length === 1) {
-      // console.log(mapFooter);
-      // console.log(mapContainer[0]);
       allMaps[0].remove();
       // console.log(mapFooter)
       mapContainer.append(mapFooter);
