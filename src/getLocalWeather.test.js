@@ -4,6 +4,7 @@ import { hasWeather } from "./hasWeather.js";
 describe("getLocalWeather", () => {
   let element;
   let p;
+  let img;
   it("is a function", () => {
     expect(getLocalWeather).toBeInstanceOf(Function);
   });
@@ -11,8 +12,8 @@ describe("getLocalWeather", () => {
     element = document.createElement("div");
     p = element.querySelectorAll("p");
     expect(p).not.toBe(null);
-    // expect(p.length).toEqual(2);
-    // expect(img).not.toBe(null);
+
+    expect(img).not.toBe(null);
   });
   const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({
@@ -21,7 +22,6 @@ describe("getLocalWeather", () => {
   );
 
   it("calls hasWeather", async () => {
-    // const place = await getCity();
     const data = await hasWeather("Moscow");
     const cityName = "Moscow";
     const API_KEY = "c768bc4e962d2a69c28ba404045dc96c";

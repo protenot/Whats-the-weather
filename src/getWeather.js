@@ -34,30 +34,23 @@ export async function getWeather(wrapper) {
   const button = document.createElement("button");
   button.innerText = "Жми сюда";
   form.append(button);
-  // async function hasWeather(cityName) {
-  // const API_KEY = "c768bc4e962d2a69c28ba404045dc96c";
-  // const response = await fetch(
-  //   `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${API_KEY}`
-  // );
 
-  // return response.json();
-  // }
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
-    // const formWeather = ev.target;
 
     let cityName = input.value;
     input.value = "";
     let weather = await hasWeather(cityName);
     const cityN = document.querySelector(".city-name");
-    cityN.textContent = weather.name;
 
     const temperatureData = document.querySelector(".temperature-data");
-    temperatureData.textContent = `${Math.round(weather.main.temp)} °C`;
+
     let iconId = weather.weather[0].icon;
     const avatar = document.querySelector(".avatar");
     avatar.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
     const imgBox = document.querySelector(".img-box");
+    cityN.textContent = weather.name;
+    temperatureData.textContent = `${Math.round(weather.main.temp)} °C`;
     imgBox.append(avatar);
 
     let weatherBox = document.querySelector("#weather-box");
@@ -77,7 +70,7 @@ export async function getWeather(wrapper) {
 
     if (allMaps.length === 1) {
       allMaps[0].remove();
-      // console.log(mapFooter)
+
       mapContainer.append(mapFooter);
     } else {
       mapContainer.append(mapFooter);
