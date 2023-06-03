@@ -15,17 +15,21 @@ h1 {
   font-size: 30px;
   font-weight: bold;
 }
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
 .temperature {
   display: flex;
   justify-content: center;
   margin: 20px auto;
   font-size: 24px;
 }
-.city {
-  display: flex;
+.city-name {
+  /*display: flex;
   align-self: center;
-  justify-content: center;
-  margin: 20px auto;
+  justify-content: center;*/
+  margin: 5px auto;
   font-size: 24px;
 }
 button {
