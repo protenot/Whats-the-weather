@@ -18,13 +18,17 @@ describe("getWeather", () => {
   let input;
   let button;
   let imgBox;
-  let place;
+  let allMaps;
   let newButton;
-  let cityN;
+  let mapContainer;
   let list;
   let city;
   let weatherBox;
   let form;
+  let mapFooter;
+  let lon;
+  let lat;
+  let arrayNode;
   //
   beforeEach(() => {
     document.documentElement.innerHTML = indexHTML;
@@ -38,21 +42,24 @@ describe("getWeather", () => {
     input = el.querySelector("input");
     button = el.querySelector("button");
     newButton = el.querySelector(".list");
-    // newButton.textContent = '';
+
     form = el.querySelector("form");
     weatherBox = el.querySelector("#weather-box");
+    mapContainer = el.querySelector("#map-container");
+    allMaps = el.querySelectorAll(".map");
     city = el.querySelector(".city");
     list = el.querySelector(".list");
-    // const spy =jest.spyOn(getCity, 'city')
-    // const spyWorking = getCity.city();
-    // .mockReturnValue('Moscow');
-    // jest.spyOn(hasWeather, 'pogoda').mockReturnValue(15);
+    mapFooter = el.querySelector(".map");
+    lon = el.querySelector("lon");
+    lat = el.querySelector("lat");
+    arrayNode = el.querySelector("arrayNode");
+
     window.fetch = jest.fn().mockResolvedValue({
       json: () =>
         Promise.resolve({
           coord: {
-            lon: 27.5667,
-            lat: 53.9,
+            lon,
+            lat,
           },
           weather: [
             {
@@ -135,20 +142,145 @@ describe("getWeather", () => {
     const list1 = "Tula";
     newButton = list1;
     input.value = list1;
-
     form.dispatchEvent(new Event("submit"));
     await sleep(200);
+
     const list2 = "Rostov";
     newButton = list2;
     input.value = list2;
     form.dispatchEvent(new Event("submit"));
     await sleep(200);
+
     const list3 = "Taganrog";
     newButton = list3;
     input.value = list3;
     form.dispatchEvent(new Event("submit"));
     await sleep(200);
-    // let allButtons = el.querySelectorAll('list');
-    expect(getParagraphs()).toEqual([list3, list2, list1]);
+
+    const list4 = "Tumen";
+    newButton = list4;
+    input.value = list4;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list5 = "Rome";
+    newButton = list5;
+    input.value = list5;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list6 = "Moscow";
+    newButton = list6;
+    input.value = list6;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list7 = "Humburg";
+    newButton = list7;
+    input.value = list7;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list8 = "Belgrad";
+    newButton = list8;
+    input.value = list8;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list9 = "Saratov";
+    newButton = list9;
+    input.value = list9;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list10 = "Paris";
+    newButton = list10;
+    input.value = list10;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list11 = "Budapesht";
+    newButton = list11;
+    input.value = list11;
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    expect(getParagraphs()).toEqual([
+      list11,
+      list10,
+      list9,
+      list8,
+      list7,
+      list6,
+      list5,
+      list4,
+      list3,
+      list2,
+    ]);
+  });
+
+  it("only unique cities in the container", async () => {
+    function getParagraphs() {
+      return [...el.querySelectorAll(".list")].map(
+        (newButton) => newButton.innerText
+      );
+    }
+    /* arrayNode = Array.from(getParagraphs(), (a) => a.innerText);
+     */
+    const list1 = "Tula";
+    newButton = list1;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list2 = "Tula";
+    newButton = list2;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list3 = "Tula";
+    newButton = list3;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    expect(getParagraphs()).toBe("Tula");
+  });
+
+  it("add only one map to container", async () => {
+    // allMaps.length = 0;
+    function getMaps() {
+      return [...el.querySelectorAll(".map")].map((mapFooter) => mapFooter);
+    }
+
+    // const img1='url1.jpg';
+    lon = 25.37;
+    lat = 56.78;
+    // mapFooter = img1
+    // input.value = "Moscow";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(100);
+    // const arrayNew = Array.from(allMaps, (a) => a.innerHTML);
+
+    // const img2='url2.jpg';
+    lon = 35.37;
+    lat = 59.78;
+    // mapFooter = img2;
+    // input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    // allMaps[0].remove();
+    await sleep(100);
+
+    // const img3='url3.jpg';
+    lon = 27.37;
+    lat = 58.9;
+    // mapFooter = img3;
+    // input.value = "Ruza";
+    form.dispatchEvent(new Event("submit"));
+    // allMaps[0].remove();
+    await sleep(100);
+
+    expect(getMaps().length).toBe(1);
   });
 });

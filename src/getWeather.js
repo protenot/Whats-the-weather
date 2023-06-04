@@ -6,7 +6,7 @@ export async function getLocalWeather(inner) {
   nameOfLocalCity.classList.add("local");
   const place = await getCity();
   nameOfLocalCity.innerText = `Город :  ${place}`;
-  console.log(getCity());
+  // console.log(getCity());
   inner.append(nameOfLocalCity);
   const tempLocal = document.createElement("p");
   tempLocal.classList.add("local");
@@ -82,7 +82,7 @@ export async function getWeather(wrapper) {
     const cityN = document.createElement("p");
 
     cityN.textContent = weather.name;
-    console.log(cityN.innerHTML);
+    // console.log(cityN.innerHTML);
 
     city.textContent = `Город :  ${cityN.textContent}`;
 
@@ -92,7 +92,7 @@ export async function getWeather(wrapper) {
 
     const newButton = document.createElement("button");
     newButton.classList.add("list");
-    console.log(newButton);
+    // console.log(newButton);
 
     let { lon } = weather.coord;
 
@@ -103,7 +103,7 @@ export async function getWeather(wrapper) {
     mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
 
     let allMaps = document.querySelectorAll(".map");
-
+    console.log(allMaps);
     if (allMaps.length === 1) {
       allMaps[0].remove();
 
@@ -115,7 +115,7 @@ export async function getWeather(wrapper) {
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
       const newButtonText = newButton.textContent;
-      console.log(newButtonText);
+      // console.log(newButtonText);
       const allButtons = weatherBox.querySelectorAll(".list");
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
 
@@ -124,7 +124,7 @@ export async function getWeather(wrapper) {
       } else {
         weatherBox.prepend(newButton);
       }
-
+      console.log(weatherBox.innerText);
       if (allButtons.length > 9) {
         allButtons[9].remove();
       }

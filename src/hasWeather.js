@@ -3,8 +3,8 @@ export async function hasWeather(cityName) {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${API_KEY}`
   );
-  console.log(response);
+  // console.log(response);
   const json = await response.json();
-  console.log(response.json);
+  // console.log(response.json);
   return json;
 }
