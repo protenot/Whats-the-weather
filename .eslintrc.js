@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ["jest", "prettier"],
   rules: {
+    "no-undef": "warn",
     "no-shadow": "warn",
     "no-unused-vars": "warn",
     "prettier/prettier": "error",
