@@ -130,6 +130,41 @@ describe("getWeather", () => {
     expect(but.tagName).toBe("BUTTON");
     expect(but.textContent).toBe("Moscow");
   });
+  it("only unique cities in the container", async () => {
+    function getPar() {
+      /*  if ([...el.querySelectorAll(".list")].includes(newButton.innerHTML)){
+      newButton.remove();
+        return [...el.querySelectorAll(".list")].map(
+        (newButton) => newButton.innerHTML);
+    }
+  else{ */
+      return [...el.querySelectorAll(".list")].map(
+        (newButton) => newButton.innerHTML
+      );
+      //  }
+    }
+    /* arrayNode = Array.from(getParagraphs(), (a) => a.innerText);
+     */
+    const list1 = "Tula";
+    newButton = list1;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list2 = "Tula";
+    newButton = list2;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    const list3 = "Tula";
+    newButton = list3;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
+
+    expect(getPar()).toBe(["Tula"]);
+  });
 
   it("not more then 10 buttons", async () => {
     // getWeather(el)
@@ -217,35 +252,6 @@ describe("getWeather", () => {
       list3,
       list2,
     ]);
-  });
-
-  it("only unique cities in the container", async () => {
-    function getParagraphs() {
-      return [...el.querySelectorAll(".list")].map(
-        (newButton) => newButton.innerText
-      );
-    }
-    /* arrayNode = Array.from(getParagraphs(), (a) => a.innerText);
-     */
-    const list1 = "Tula";
-    newButton = list1;
-    input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    const list2 = "Tula";
-    newButton = list2;
-    input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    const list3 = "Tula";
-    newButton = list3;
-    input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    expect(getParagraphs()).toBe("Tula");
   });
 
   it("add only one map to container", async () => {

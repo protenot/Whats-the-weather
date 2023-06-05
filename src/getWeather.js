@@ -114,7 +114,7 @@ export async function getWeather(wrapper) {
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-      const newButtonText = newButton.textContent;
+      // const newButtonText = newButton.textContent;
       // console.log(newButtonText);
       const allButtons = weatherBox.querySelectorAll(".list");
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
@@ -128,7 +128,8 @@ export async function getWeather(wrapper) {
       if (allButtons.length > 9) {
         allButtons[9].remove();
       }
-      console.log(allButtons);
+
+      console.log(arrayNode);
 
       newButton.addEventListener("click", async () => {
         console.log(newButton.textContent);
