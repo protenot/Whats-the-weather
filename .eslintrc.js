@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ["jest", "prettier"],
   rules: {
+    "new-cap": "warn",
     "no-undef": "warn",
     "no-shadow": "warn",
     "no-unused-vars": "warn",
@@ -25,6 +26,7 @@ module.exports = {
         js: "always",
         mjs: "never",
         jsx: "never",
+        css: "never",
       },
     ],
     "max-len": [
