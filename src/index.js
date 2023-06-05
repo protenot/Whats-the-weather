@@ -1,4 +1,4 @@
-// import "./style.css";
+import "./style.css";
 import { getLocalWeather, getWeather } from "./getWeather.js";
 
 getLocalWeather(document.querySelector("#header-container"));

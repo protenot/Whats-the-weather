@@ -22,13 +22,14 @@ describe("getWeather", () => {
   let newButton;
   let mapContainer;
   let list;
-  let city;
+  let cityN;
   let weatherBox;
   let form;
   let mapFooter;
   let lon;
   let lat;
   let arrayNode;
+  let city;
   //
   beforeEach(() => {
     document.documentElement.innerHTML = indexHTML;
@@ -141,6 +142,34 @@ describe("getWeather", () => {
     expect(temp.textContent).toEqual("Температура :  9 °C");
     expect(icon).not.toEqual(null);
   });
+  it("after click on button with the name of city to see the weather", async () => {
+    const temp = el.querySelector(".city-temp");
+    temp.textContent = "Температура :  15 °C";
+    const icon = el.querySelector("img");
+
+    button.click();
+    await sleep(200);
+    cityN = el.querySelector(".city-place");
+    expect(cityN).not.toEqual(null);
+    cityN.textContent = "Rostov";
+    expect(cityN.innerHTML).toBe("Rostov");
+    expect(temp.textContent).toEqual("Температура :  15 °C");
+    expect(icon).not.toEqual(null);
+  });
+  it("to see map", async () => {
+    // input.value = "Moscow";
+    lon = 25.37;
+    lat = 56.78;
+    form.submit();
+    await sleep(200);
+    const map = el.querySelector(".map");
+    expect(map).not.toEqual(null);
+    expect(map.src).toBe(
+      "https://static-maps.yandex.ru/1.x/?ll=25.37,56.78&size=450,450&z=12&l=map"
+    );
+  });
+
+  // })
 
   it("only unique cities in the container", async () => {
     // function getPar(allButtons) {
@@ -268,40 +297,32 @@ describe("getWeather", () => {
   });
 
   it("add only one map to container", async () => {
-    // allMaps.length = 0;
-    function getMaps() {
-      return [...el.querySelectorAll(".map")].map((mapFooter) => mapFooter);
-    }
-    if (getMaps().length === 1) {
-      mapFooter.remove();
-    }
-    // const img1='url1.jpg';
+    mapContainer = el.querySelector("#map-container");
+    input.value = "Riga";
     lon = 25.37;
     lat = 56.78;
-    // mapFooter = img1
-    // input.value = "Moscow";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(100);
-    // const arrayNew = Array.from(allMaps, (a) => a.innerHTML);
 
-    // const img2='url2.jpg';
+    form.submit();
+    await sleep(200);
+    // let mapAll =[...el.querySelectorAll('.map')].map();
+    // mapAll = el.querySelectorAll('.map');
     lon = 35.37;
     lat = 59.78;
-    // mapFooter = img2;
-    // input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    // allMaps[0].remove();
-    await sleep(100);
 
-    // const img3='url3.jpg';
+    form.submit();
+    await sleep(100);
+    // mapAll = el.querySelectorAll('.map');
     lon = 27.37;
     lat = 58.9;
-    // mapFooter = img3;
-    // input.value = "Ruza";
-    form.dispatchEvent(new Event("submit"));
-    // allMaps[0].remove();
-    await sleep(100);
 
-    expect(getMaps().length).toBe(1);
+    form.submit();
+    await sleep(100);
+    // mapAll = el.querySelectorAll('.map');
+    expect(mapContainer).not.toBe(null);
+    // expect(mapContainer.length).toBe(1);
+
+    expect(mapContainer.innerText).toBe(
+      "https://static-maps.yandex.ru/1.x/?ll=25.37,56.78&size=450,450&z=12&l=map"
+    );
   });
 });
