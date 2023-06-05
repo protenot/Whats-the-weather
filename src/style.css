@@ -1,0 +1,82 @@
+* {
+  margin: 0 auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-align: center;
+  color: white;
+}
+
+body {
+  background-color: transparent;
+  background-image: url("img/sunset2.jpg");
+  background-size: cover;
+}
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.temperature {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  font-size: 24px;
+}
+.city-name {
+  /*display: flex;
+  align-self: center;
+  justify-content: center;*/
+  margin: 5px auto;
+  font-size: 24px;
+}
+
+.city-temp {
+  margin: 5px auto;
+  font-size: 24px;
+}
+button {
+  font-size: 20px;
+  color: black;
+  margin-left: 20px;
+  margin: 5px auto;
+}
+input {
+  font-size: 20px;
+  color: black;
+  margin: 5px auto;
+}
+.list {
+  display: block;
+}
+#header-container {
+  font-size: 24px;
+  color: white;
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  /*justify-content: center;*/
+  background-image: url("img/sunset.jpg");
+  background-position: left;
+}
+.loclal {
+  display: block;
+  margin-top: 20px;
+  text-align: bottom;
+  background-color: beige;
+}
+
+#weather-box {
+  background-color: transparent;
+}
+.list {
+  width: 30%;
+  margin: 0 auto;
+  /* border-style: none;*/
+}
+#map-container {
+  margin-bottom: 2%;
+}
