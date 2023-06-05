@@ -4,6 +4,7 @@ on:
   push:
     branches: [ "branch-1" ]
   pull_request:
+
     branches: [ "brunch-1" ]
     
 permissions:
@@ -11,17 +12,21 @@ permissions:
   pages: write
   id-token: write
   
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
+
         node-version: [18.x]
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -37,4 +42,3 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with: 
         folder: prod
-
