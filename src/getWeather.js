@@ -44,7 +44,7 @@ export async function getWeather(wrapper) {
   city.append(cityN);
 
   const temperatureData = document.createElement("p");
-  temperatureData.classList.add("city-name");
+  temperatureData.classList.add("city-temp");
   temperatureData.textContent = "Температура : ";
   wrapper.append(temperatureData);
 

@@ -126,23 +126,36 @@ describe("getWeather", () => {
     form.submit();
     await sleep(200);
     const but = weatherBox.firstChild;
+    // const temp = weatherBox.secondChild;
     expect(but).not.toEqual(null);
     expect(but.tagName).toBe("BUTTON");
     expect(but.textContent).toBe("Moscow");
   });
+  it("to see temperature und icon weather when submit", async () => {
+    input.value = "Moscow";
+    form.submit();
+    await sleep(200);
+    const temp = el.querySelector(".city-temp");
+    const icon = el.querySelector("img");
+    expect(temp).not.toEqual(null);
+    expect(temp.textContent).toEqual("Температура :  9 °C");
+    expect(icon).not.toEqual(null);
+  });
+
   it("only unique cities in the container", async () => {
-    function getPar() {
-      /*  if ([...el.querySelectorAll(".list")].includes(newButton.innerHTML)){
+    // function getPar(allButtons) {
+    /*  if ([...el.querySelectorAll(".list")].includes(newButton.innerHTML)){
       newButton.remove();
         return [...el.querySelectorAll(".list")].map(
         (newButton) => newButton.innerHTML);
     }
   else{ */
-      return [...el.querySelectorAll(".list")].map(
-        (newButton) => newButton.innerHTML
-      );
-      //  }
-    }
+    const allButtons = [...el.querySelectorAll(".list")].map(
+      (newButton) => newButton.innerHTML
+    );
+    //  }
+    // return allButtons.length
+    // }
     /* arrayNode = Array.from(getParagraphs(), (a) => a.innerText);
      */
     const list1 = "Tula";
@@ -163,7 +176,7 @@ describe("getWeather", () => {
     form.dispatchEvent(new Event("submit"));
     await sleep(200);
 
-    expect(getPar()).toBe(["Tula"]);
+    expect(allButtons.textContent).toBe(["Tula"]);
   });
 
   it("not more then 10 buttons", async () => {
@@ -259,7 +272,9 @@ describe("getWeather", () => {
     function getMaps() {
       return [...el.querySelectorAll(".map")].map((mapFooter) => mapFooter);
     }
-
+    if (getMaps().length === 1) {
+      mapFooter.remove();
+    }
     // const img1='url1.jpg';
     lon = 25.37;
     lat = 56.78;
