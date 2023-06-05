@@ -2,9 +2,9 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "branch-1" ]
+    branches: [ "brunch-1" ]
   pull_request:
-    branches: [ "branch-1" ]
+    branches: [ "brunch-1" ]
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18]
 
     steps:
     - uses: actions/checkout@v3
