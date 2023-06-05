@@ -2,9 +2,9 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "branch-1" ]
+    branches: [ "brunch-1" ]
   pull_request:
-    branches: [ "branch-1" ]
+    branches: [ "brunch-1" ]
 
 permissions:
   contents: write
