@@ -121,7 +121,7 @@ export async function getWeather(wrapper) {
 
       if (
         arrayNode.includes(newButton.innerHTML) &&
-        newButton.innerText !== allButtons[0].innerText
+        newButton.innerText === allButtons[0].innerText
       ) {
         console.log(arrayNode);
       } else {
