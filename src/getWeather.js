@@ -119,12 +119,16 @@ export async function getWeather(wrapper) {
       const allButtons = weatherBox.querySelectorAll(".list");
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
 
-      if (arrayNode.includes(newButton.innerHTML)) {
+      if (
+        arrayNode.includes(newButton.innerHTML) &&
+        newButton.innerText !== allButtons[0].innerText
+      ) {
         console.log(arrayNode);
       } else {
         weatherBox.prepend(newButton);
       }
-      console.log(weatherBox.innerText);
+      console.log(newButton.innerText);
+      console.log(allButtons[0].innerText);
       if (allButtons.length > 9) {
         allButtons[9].remove();
       }
