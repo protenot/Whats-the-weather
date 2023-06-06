@@ -119,10 +119,7 @@ export async function getWeather(wrapper) {
       const allButtons = weatherBox.querySelectorAll(".list");
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
 
-      if (
-        arrayNode.includes(newButton.innerHTML) &&
-        newButton.innerText === allButtons[0].innerText
-      ) {
+      if (arrayNode.includes(newButton.innerHTML)) {
         console.log(arrayNode);
       } else {
         weatherBox.prepend(newButton);
