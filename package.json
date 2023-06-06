@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --open --mode development",
     "build-dev": "webpack -c webpack.config.js",
     "build-prod": "webpack -c webpack.config.prod.js",
     "test": "jest",
     "lint": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint . --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev-server": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
