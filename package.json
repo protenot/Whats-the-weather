@@ -8,6 +8,11 @@
     "build-dev": "webpack -c webpack.config.js",
     "build-prod": "webpack -c webpack.config.prod.js",
     "test": "jest",
+    "cover": "jest --coverage",
+    "make-badges": "istanbul-badges-readme",
+    "make-badges-silent": "istanbul-badges-readme --silent",
+    "make-badges-custom-coverage-dir": "istanbul-badges-readme --coverageDir='./my-custom-coverage'",
+    "make-badges-custom-readme-dir": "istanbul-badges-readme --readmeDir='./my-custom-readme'",
     "lint": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint . --fix",
     "prepare": "husky install",
@@ -15,6 +20,9 @@
   },
   "author": "",
   "license": "ISC",
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",
@@ -29,6 +37,7 @@
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
     "husky": "^8.0.3",
+    "istanbul-badges-readme": "^1.8.5",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "lint-staged": "^13.2.2",
