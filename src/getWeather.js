@@ -109,7 +109,7 @@ export async function getWeather(wrapper) {
     mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
 
     let allMaps = document.querySelectorAll(".map");
-    console.log(allMaps);
+
     if (allMaps.length === 1) {
       allMaps[0].remove();
 
@@ -120,8 +120,9 @@ export async function getWeather(wrapper) {
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-      // console.log(newButtonText);
+
       const allButtons = weatherBox.querySelectorAll(".list");
+
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
 
       if (
@@ -132,8 +133,6 @@ export async function getWeather(wrapper) {
       } else {
         weatherBox.prepend(newButton);
       }
-      console.log(newButton.innerText);
-      console.log(arrayNode[8]);
 
       if (allButtons.length > 9) {
         allButtons[9].remove();
@@ -141,11 +140,10 @@ export async function getWeather(wrapper) {
 
       input.value = "";
       newButton.addEventListener("click", async () => {
-        console.log(newButton.textContent);
         cityName = newButton.textContent;
         weather = await hasWeather(cityName);
         city.textContent = `Город :  ${cityN.textContent}`;
-        console.log(weather.main.temp);
+
         temperatureData.textContent = `Температура :  ${Math.round(
           weather.main.temp
         )} °C`;
@@ -157,7 +155,7 @@ export async function getWeather(wrapper) {
         mapFooter.src = `https://static-maps.yandex.ru/1.x/?ll=${lon},${lat}&size=450,450&z=12&l=map`;
 
         allMaps = document.querySelectorAll(".map");
-        console.log(allMaps);
+
         if (allMaps.length === 1) {
           allMaps[0].remove();
 

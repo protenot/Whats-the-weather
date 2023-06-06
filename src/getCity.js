@@ -1,4 +1,3 @@
-// import{isJsonString} from'./1.js'
 export async function getCity() {
   const responseCity = await fetch("https://get.geojs.io/v1/ip/geo.json");
   console.log(responseCity);

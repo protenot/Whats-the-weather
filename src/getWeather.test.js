@@ -1,9 +1,5 @@
 import { getWeather } from "./getWeather.js";
 
-import { hasWeather } from "./hasWeather.js";
-
-import { getCity } from "./getCity.js";
-
 const fs = require("fs");
 
 const indexHTML = fs.readFileSync(`${__dirname}/index.html`).toString();
@@ -30,10 +26,10 @@ describe("getWeather", () => {
   let lat;
   let arrayNode;
   let city;
-  //
+
   beforeEach(() => {
     document.documentElement.innerHTML = indexHTML;
-    // let originalFetch;
+
     originalFetch = window.fetch;
 
     el = document.createElement("div");
@@ -94,45 +90,24 @@ describe("getWeather", () => {
     window.fetch = originalFetch;
   });
 
-  // it( 'spy is working', ()=>{
-  // expect(spy).toHaveBeenCalled();
-  // })
-
   it("creates markup", () => {
     expect(input).not.toBe(null);
     expect(button).not.toBe(null);
     expect(imgBox).not.toBe(null);
-
-    // expect(newButton).not.toBe(null);
-
     expect(input.placeholder).toEqual("Введи название города");
   });
 
-  /* it("adds form and input and button to #container", () => {
-    const form1 = el.secondChild;
-   // const put = form1.secondChild;
-    const but = form1.lastChild;
-    // const avtr = city.firstChild;
-    expect(form1).not.toEqual(null);
-    expect(form1.tagName).toBe("FORM");
-    expect(put).not.toEqual(null);
-    expect(put.tagName).toBe("INPUT");
-    expect(but).not.toEqual(null);
-    expect(but.tagName).toBe("BUTTON");
-    // expect(avtr).not.toEqual(null);
-    // expect(avtr.tagName).toBe("P")
-  }); */
   it("listener prepends button upon submit", async () => {
     input.value = "Moscow";
     form.submit();
     await sleep(200);
     const but = weatherBox.firstChild;
-    // const temp = weatherBox.secondChild;
     expect(but).not.toEqual(null);
     expect(but.tagName).toBe("BUTTON");
     expect(but.textContent).toBe("Moscow");
   });
-  it("to see temperature und icon weather when submit", async () => {
+
+  it("could see temperature und icon weather when submit", async () => {
     input.value = "Moscow";
     form.submit();
     await sleep(200);
@@ -142,6 +117,7 @@ describe("getWeather", () => {
     expect(temp.textContent).toEqual("Температура :  9 °C");
     expect(icon).not.toEqual(null);
   });
+
   it("after click on button with the name of city to see the weather", async () => {
     const temp = el.querySelector(".city-temp");
     temp.textContent = "Температура :  15 °C";
@@ -156,8 +132,8 @@ describe("getWeather", () => {
     expect(temp.textContent).toEqual("Температура :  15 °C");
     expect(icon).not.toEqual(null);
   });
-  it("to see map", async () => {
-    // input.value = "Moscow";
+
+  it("could see map", async () => {
     lon = 25.37;
     lat = 56.78;
     form.submit();
@@ -169,47 +145,7 @@ describe("getWeather", () => {
     );
   });
 
-  // })
-
-  // it("only unique cities in the container", async () => {
-  //  // function getPar(allButtons) {
-  // /*  if ([...el.querySelectorAll(".list")].includes(newButton.innerHTML)){
-  //   newButton.remove();
-  //     return [...el.querySelectorAll(".list")].map(
-  //    (newButton) => newButton.innerHTML);
-  // }
-  // else{ */
-  // const allButtons = [...el.querySelectorAll(".list")].map(
-  //   (newButton) => newButton.innerHTML
-  // );
-  //  }
-  // return allButtons.length
-  // }
-  /* arrayNode = Array.from(getParagraphs(), (a) => a.innerText);
-   */
-  // const list1 = "Tula";
-  // newButton = list1;
-  // input.value = "Tula";
-  /* form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    const list2 = "Tula";
-    newButton = list2;
-    input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    const list3 = "Tula";
-    newButton = list3;
-    input.value = "Tula";
-    form.dispatchEvent(new Event("submit"));
-    await sleep(200);
-
-    expect(allButtons.textContent).toBe(["Tula"]);
-  }); */
-
   it("not more then 10 buttons", async () => {
-    // getWeather(el)
     function getParagraphs() {
       return [...el.querySelectorAll(".list")].map(
         (newButton) => newButton.innerHTML
@@ -296,33 +232,65 @@ describe("getWeather", () => {
     ]);
   });
 
-  // it("add only one map to container", async () => {
-  //   mapContainer = el.querySelector("#map-container");
-  //   input.value = "Riga";
-  //   lon = 25.37;
-  //   lat = 56.78;
+  // Следующие  два теста не проходят, хотя сделаны по аналогии
 
-  //  form.submit();
-  //  await sleep(200);
-  // // let mapAll =[...el.querySelectorAll('.map')].map();
-  // // mapAll = el.querySelectorAll('.map');
-  // lon = 35.37;
-  // lat = 59.78;
+  /* it("only unique cities in the container", async () => {
+   function getParagraphs() {
+  
+       return [...el.querySelectorAll(".list")].map(
+      (newButton) => newButton.innerHTML);
+   }
+  
+   const list1 = "Tula";
+   newButton = list1;
+   input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
 
-  // form.submit();
-  // await sleep(100);
-  // mapAll = el.querySelectorAll('.map');
-  // lon = 27.37;
-  // lat = 58.9;
+    const list2 = "Tula";
+    newButton = list2;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
 
-  // form.submit();
-  // await sleep(100);
-  /// / mapAll = el.querySelectorAll('.map');
-  /// / expect(mapContainer).not.toBe(null);
-  // // expect(mapContainer.length).toBe(1);
+    const list3 = "Tula";
+    newButton = list3;
+    input.value = "Tula";
+    form.dispatchEvent(new Event("submit"));
+    await sleep(200);
 
-  // expect(mapContainer.innerText).toBe(
-  //   "https://static-maps.yandex.ru/1.x/?ll=25.37,56.78&size=450,450&z=12&l=map"
-  // );
-  // });
+    expect(getParagraphs()).toEqual(["Tula"]);
+    expect(getParagraphs.length).toBe(1);
+  }); */
+
+  /*
+   it("add only one map to container", async () => {
+    function getMap(){
+    return[...el.querySelectorAll('.map')].map((mapFooter)=>mapFooter.src)
+  }
+  
+     //input.value = "Riga";
+     lon = 25.37;
+     lat = 56.78;
+
+    form.submit();
+   await sleep(200);
+  
+    lon = 35.37;
+   lat = 59.78;
+
+  form.submit();
+  await sleep(100);
+
+   lon = 27.37;
+   lat = 58.9;
+
+  form.submit();
+  await sleep(100);
+  
+   expect(getMap(lon,lat) ).not.toBe(null);
+  expect(getMap(lon, lat).length).toBe(1);
+
+  
+   }); */
 });
