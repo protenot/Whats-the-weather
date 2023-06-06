@@ -4,24 +4,32 @@ import { getCity } from "./getCity.js";
 export async function getLocalWeather(inner) {
   const nameOfLocalCity = document.createElement("p");
   nameOfLocalCity.classList.add("local");
+
   const place = await getCity();
+
   nameOfLocalCity.innerText = `Город :  ${place}`;
-  // console.log(getCity());
   inner.append(nameOfLocalCity);
+
   const tempLocal = document.createElement("p");
   tempLocal.classList.add("local");
+
   const data = await hasWeather(place);
+
   tempLocal.innerText = `Температура :  ${Math.round(data.main.temp)} °C`;
   inner.append(tempLocal);
+
   const imgLocal = document.createElement("img");
   imgLocal.classList.add("local");
+
   const iconLocal = data.weather[0].icon;
+
   imgLocal.src = `http://openweathermap.org/img/wn/${iconLocal}@2x.png`;
   inner.append(imgLocal);
 }
 export async function getWeather(wrapper) {
   const form = document.createElement("form");
   wrapper.prepend(form);
+
   const h2 = document.createElement("h2");
   h2.textContent = "Хочешь узнать погоду?";
   wrapper.prepend(h2);
@@ -82,7 +90,6 @@ export async function getWeather(wrapper) {
     const cityN = document.createElement("p");
 
     cityN.textContent = weather.name;
-    // console.log(cityN.innerHTML);
 
     city.textContent = `Город :  ${cityN.textContent}`;
 
@@ -92,7 +99,6 @@ export async function getWeather(wrapper) {
 
     const newButton = document.createElement("button");
     newButton.classList.add("list");
-    // console.log(newButton);
 
     let { lon } = weather.coord;
 
@@ -114,17 +120,20 @@ export async function getWeather(wrapper) {
 
     if (cityN.textContent) {
       newButton.textContent = cityN.textContent;
-      // const newButtonText = newButton.textContent;
       // console.log(newButtonText);
       const allButtons = weatherBox.querySelectorAll(".list");
       const arrayNode = Array.from(allButtons, (a) => a.innerText);
 
-      if (arrayNode.includes(newButton.innerHTML)) {
+      if (
+        arrayNode.includes(newButton.innerHTML) &&
+        newButton.innerHTML !== arrayNode[9]
+      ) {
         console.log(arrayNode);
       } else {
         weatherBox.prepend(newButton);
       }
       console.log(newButton.innerText);
+      console.log(arrayNode[8]);
 
       if (allButtons.length > 9) {
         allButtons[9].remove();

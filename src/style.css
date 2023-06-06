@@ -47,7 +47,7 @@ button {
 input {
   font-size: 20px;
   color: black;
-  margin: 5px auto;
+  margin: 5px 20px 5px 0;
 }
 .list {
   display: block;
