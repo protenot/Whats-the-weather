@@ -125,13 +125,12 @@ export async function getWeather(wrapper) {
         weatherBox.prepend(newButton);
       }
       console.log(newButton.innerText);
-      console.log(allButtons[0].innerText);
+
       if (allButtons.length > 9) {
         allButtons[9].remove();
       }
 
-      console.log(arrayNode);
-
+      input.value = "";
       newButton.addEventListener("click", async () => {
         console.log(newButton.textContent);
         cityName = newButton.textContent;
@@ -159,6 +158,5 @@ export async function getWeather(wrapper) {
         }
       });
     }
-    input.value = "";
   });
 }
