@@ -1,5 +1,6 @@
 import { hasWeather } from "./hasWeather.js";
 import { getCity } from "./getCity.js";
+import { putInLocalStorage } from "./putInLocalStorage.js";
 
 export async function getLocalWeather(inner) {
   const nameOfLocalCity = document.createElement("p");
@@ -80,6 +81,8 @@ export async function getWeather(wrapper) {
     ev.preventDefault();
 
     let cityName = input.value;
+
+    putInLocalStorage(cityName);
 
     let weather = await hasWeather(cityName);
 
