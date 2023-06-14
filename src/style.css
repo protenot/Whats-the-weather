@@ -27,9 +27,6 @@ h2 {
   font-size: 24px;
 }
 .city-name {
-  /*display: flex;
-  align-self: center;
-  justify-content: center;*/
   margin: 5px auto;
   font-size: 24px;
 }
@@ -60,7 +57,7 @@ input {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  /*justify-content: center;*/
+
   background-image: url("img/sunset.jpg");
   background-position: left;
 }

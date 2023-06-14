@@ -27,6 +27,7 @@ export async function getLocalWeather(inner) {
   imgLocal.src = `http://openweathermap.org/img/wn/${iconLocal}@2x.png`;
   inner.append(imgLocal);
 }
+
 export async function getWeather(wrapper) {
   const form = document.createElement("form");
   wrapper.prepend(form);
@@ -62,7 +63,7 @@ export async function getWeather(wrapper) {
   wrapper.append(avatar);
 
   const h2WeatherBox = document.createElement("h2");
-  h2WeatherBox.textContent = "Вы недавно смотрели погоду в городах";
+
   wrapper.append(h2WeatherBox);
 
   const weatherBox = document.createElement("div");
@@ -70,12 +71,26 @@ export async function getWeather(wrapper) {
   wrapper.append(weatherBox);
 
   const h2Map = document.createElement("h2");
-  h2Map.textContent = "Это то, что Вы ищете?";
+
   wrapper.append(h2Map);
 
   const mapContainer = document.createElement("div");
   mapContainer.id = "map-container";
   wrapper.append(mapContainer);
+
+  const localPlace = await getCity();
+  const dataLocal = await hasWeather(localPlace);
+  console.log(dataLocal);
+  const lonLocal = dataLocal.coord.lon;
+
+  const latLocal = dataLocal.coord.lat;
+  const addressLocal = `https://static-maps.yandex.ru/1.x/?ll=${lonLocal},${latLocal}&size=450,450&z=12&l=map`;
+
+  const temporaryMap = document.createElement("img");
+  temporaryMap.classList.add("map");
+  temporaryMap.src = addressLocal;
+  console.log(temporaryMap);
+  mapContainer.append(temporaryMap);
 
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
@@ -106,6 +121,10 @@ export async function getWeather(wrapper) {
     let { lon } = weather.coord;
 
     let { lat } = weather.coord;
+
+    h2WeatherBox.textContent = "Вы недавно смотрели погоду в городах";
+
+    h2Map.textContent = "Это то, что Вы ищете?";
 
     const mapFooter = document.createElement("img");
     mapFooter.classList.add("map");
