@@ -4,6 +4,20 @@ const fs = require("fs");
 
 const indexHTML = fs.readFileSync(`${__dirname}/index.html`).toString();
 
+jest.mock("./getCity", () => ({
+  getCity: jest.fn(() => Promise.resolve("Moscow")),
+}));
+
+jest.mock("./hasWeather", () => ({
+  hasWeather: jest.fn((city) =>
+    Promise.resolve({
+      name: city,
+      main: { temp: 9 },
+      weather: [{ icon: "01d" }],
+      coord: { lon: 25.37, lat: 56.78 },
+    })
+  ),
+}));
 const sleep = (x) =>
   new Promise((resolve) => {
     setTimeout(resolve, x);
