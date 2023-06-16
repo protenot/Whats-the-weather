@@ -3,7 +3,7 @@ export async function getCity() {
   console.log(responseCity);
 
   const jsonCity = await responseCity.json(JSON.stringify());
-  // console.log(isJsonString(jsonCity));
+
   console.log(jsonCity);
   return jsonCity.city;
 }

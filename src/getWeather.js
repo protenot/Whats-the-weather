@@ -78,7 +78,7 @@ export async function getWeather(wrapper) {
   mapContainer.id = "map-container";
   wrapper.append(mapContainer);
 
-  const localPlace = await getCity();
+  /* const localPlace = await getCity();
   const dataLocal = await hasWeather(localPlace);
   console.log(dataLocal);
   const lonLocal = dataLocal.coord.lon;
@@ -90,7 +90,7 @@ export async function getWeather(wrapper) {
   temporaryMap.classList.add("map");
   temporaryMap.src = addressLocal;
   console.log(temporaryMap);
-  mapContainer.append(temporaryMap);
+  mapContainer.append(temporaryMap); */
 
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();

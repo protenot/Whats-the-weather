@@ -99,7 +99,7 @@ describe("getWeather", () => {
 
   it("listener prepends button upon submit", async () => {
     input.value = "Moscow";
-    form.submit();
+    form.dispatchEvent(new Event("submit"));
     await sleep(200);
     const but = weatherBox.firstChild;
     expect(but).not.toEqual(null);
@@ -109,7 +109,7 @@ describe("getWeather", () => {
 
   it("could see temperature und icon weather when submit", async () => {
     input.value = "Moscow";
-    form.submit();
+    form.dispatchEvent(new Event("submit"));
     await sleep(200);
     const temp = el.querySelector(".city-temp");
     const icon = el.querySelector("img");
@@ -136,7 +136,7 @@ describe("getWeather", () => {
   it("could see map", async () => {
     lon = 25.37;
     lat = 56.78;
-    form.submit();
+    form.dispatchEvent(new Event("submit"));
     await sleep(200);
     const map = el.querySelector(".map");
     expect(map).not.toEqual(null);

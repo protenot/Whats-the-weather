@@ -14,11 +14,19 @@ const mockObject = {
 };
 const mockCity = "Banjar Danginpangkung";
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve(mockObject),
-  })
-);
+beforeEach(() => {
+  originalFetch = window.fetch;
+
+  window.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockObject),
+    })
+  );
+});
+
+afterEach(() => {
+  window.fetch = originalFetch;
+});
 
 describe("fetch", () => {
   let city;
